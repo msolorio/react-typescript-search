@@ -13,10 +13,11 @@ type apiData = {
 };
 
 function App(): JSX.Element {
-  const initialState: Baby[] = [];
+  const initialBabyList: Baby[] = [];
 
-  const [babyData, setBabyData] = useState(initialState);
+  const [babyData, setBabyData] = useState(initialBabyList);
   const [searchVal, setSearchVal] = useState('');
+  const [shortList, setShortList] = useState(initialBabyList);
 
   useEffect(() => {
     fetch('/babyData.json')
@@ -30,7 +31,12 @@ function App(): JSX.Element {
     <div className="App">
       <h1>React Hooks and TypeScript in the House!</h1>
       <Search searchVal={searchVal} setSearchVal={setSearchVal} />
-      <NamePicker babyData={babyData} searchVal={searchVal} />
+      <NamePicker 
+        babyData={babyData} 
+        searchVal={searchVal} 
+        shortList={shortList}
+        setShortList={setShortList}
+      />
     </div>
   );
 }

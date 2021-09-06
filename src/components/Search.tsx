@@ -1,19 +1,10 @@
-import { useState } from 'react';
-
-interface SearchProps {
-  searchVal: string,
-  setSearchVal: (searchVal: string) => void
-}
-
-
 function Search(props: SearchProps): JSX.Element {
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const inputVal: string = event.target.value;
-
+    
     props.setSearchVal(inputVal);
   }
-
-
+  
   return (
     <header>
         <input 
@@ -26,5 +17,12 @@ function Search(props: SearchProps): JSX.Element {
     </header>
   );
 }
+
+
+interface SearchProps {
+  searchVal: string,
+  setSearchVal: (newSearchVal: string) => void
+}
+
 
 export default Search;
