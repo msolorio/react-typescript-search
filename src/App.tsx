@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import NamePicker from './components/NamePicker';
+import Search from './components/Search';
 
-function App() {
+type Baby = {
+  id: number,
+  name: string,
+  sex: string
+}
+
+type apiData = {
+  babyData: Baby[]
+};
+
+function App(): JSX.Element {
+  const initialState: Baby[] = [];
+
+  const [babyData, setBabyData] = useState(initialState);
+  const [searchResults, setSearchResults] = useState(initialState);
+
+  useEffect(() => {
+    fetch('/babyData.json')
+      .then(response => response.json())
+      .then((data: apiData) => {
+        setBabyData(data.babyData);
+        setSearchResults(data.babyData);
+      })
+  }, []);
+
+  const updateBabyData = (inputVal: string): void => {
+    const searchResults = babyData.filter((baby) => {
+      return baby.name.toLowerCase().includes(inputVal);
+    })
+
+    setSearchResults(searchResults);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React Hooks and TypeScript in the House!</h1>
+      <Search updateBabyData={updateBabyData} />
+      <NamePicker babiesArr={searchResults} />
     </div>
   );
 }
