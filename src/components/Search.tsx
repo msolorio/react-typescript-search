@@ -8,8 +8,10 @@ function Search(props: SearchProps): JSX.Element {
   const [searchVal, setSearchVal] = useState('');
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setSearchVal(event.target.value);
-    props.updateBabyData(event.target.value);
+    const inputVal: string = event.target.value;
+    
+    setSearchVal(inputVal);
+    props.updateBabyData(inputVal);
   }
 
 

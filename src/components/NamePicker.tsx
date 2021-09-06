@@ -10,7 +10,7 @@ interface NamePickerProps { babiesArr: Baby[] }
 function NamePicker(props: NamePickerProps): JSX.Element {
   console.log(props);
 
-  const names = props.babiesArr.map((baby) => {
+  const names: JSX.Element[] = props.babiesArr.map((baby: Baby) => {
     return (
       <li className={baby.sex} key={baby.id}>
         <button>{baby.name}</button>

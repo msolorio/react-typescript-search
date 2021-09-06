@@ -28,7 +28,7 @@ function App(): JSX.Element {
   }, []);
 
   const updateBabyData = (inputVal: string): void => {
-    const searchResults = babyData.filter((baby) => {
+    const searchResults: Baby[] = babyData.filter((baby) => {
       return baby.name.toLowerCase().includes(inputVal);
     })
 
