@@ -5,12 +5,15 @@ type Baby = {
   sex: string
 }
 
-interface NamePickerProps { babiesArr: Baby[] }
+interface NamePickerProps { babyData: Baby[], searchVal: string }
 
 function NamePicker(props: NamePickerProps): JSX.Element {
-  console.log(props);
 
-  const names: JSX.Element[] = props.babiesArr.map((baby: Baby) => {
+  const searchResults: Baby[] = props.babyData.filter((baby) => {
+    return baby.name.toLowerCase().includes(props.searchVal.toLowerCase());
+  })
+
+  const names: JSX.Element[] = searchResults.map((baby: Baby) => {
     return (
       <li className={baby.sex} key={baby.id}>
         <button>{baby.name}</button>

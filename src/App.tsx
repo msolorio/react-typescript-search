@@ -16,30 +16,21 @@ function App(): JSX.Element {
   const initialState: Baby[] = [];
 
   const [babyData, setBabyData] = useState(initialState);
-  const [searchResults, setSearchResults] = useState(initialState);
+  const [searchVal, setSearchVal] = useState('');
 
   useEffect(() => {
     fetch('/babyData.json')
       .then(response => response.json())
       .then((data: apiData) => {
         setBabyData(data.babyData);
-        setSearchResults(data.babyData);
       })
   }, []);
-
-  const updateBabyData = (inputVal: string): void => {
-    const filteredBabyData: Baby[] = babyData.filter((baby) => {
-      return baby.name.toLowerCase().includes(inputVal);
-    })
-
-    setSearchResults(filteredBabyData);
-  }
 
   return (
     <div className="App">
       <h1>React Hooks and TypeScript in the House!</h1>
-      <Search updateBabyData={updateBabyData} />
-      <NamePicker babiesArr={searchResults} />
+      <Search searchVal={searchVal} setSearchVal={setSearchVal} />
+      <NamePicker babyData={babyData} searchVal={searchVal} />
     </div>
   );
 }

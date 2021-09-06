@@ -1,19 +1,17 @@
 import { useState } from 'react';
 
 interface SearchProps {
-  updateBabyData: (inputVal: string) => void
+  searchVal: string,
+  setSearchVal: (searchVal: string) => void
 }
 
-function Search(props: SearchProps): JSX.Element {
-  const [searchVal, setSearchVal] = useState('');
 
+function Search(props: SearchProps): JSX.Element {
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const inputVal: string = event.target.value;
-    
-    setSearchVal(inputVal);
-    props.updateBabyData(inputVal);
-  }
 
+    props.setSearchVal(inputVal);
+  }
 
 
   return (
@@ -22,7 +20,7 @@ function Search(props: SearchProps): JSX.Element {
           autoFocus
           type="text" 
           placeholder="Type a name..." 
-          value={searchVal}
+          value={props.searchVal}
           onChange={handleInputChange}
         />
     </header>
