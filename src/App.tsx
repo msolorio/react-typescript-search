@@ -28,11 +28,11 @@ function App(): JSX.Element {
   }, []);
 
   const updateBabyData = (inputVal: string): void => {
-    const searchResults: Baby[] = babyData.filter((baby) => {
+    const filteredBabyData: Baby[] = babyData.filter((baby) => {
       return baby.name.toLowerCase().includes(inputVal);
     })
 
-    setSearchResults(searchResults);
+    setSearchResults(filteredBabyData);
   }
 
   return (
